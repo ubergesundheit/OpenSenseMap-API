@@ -1,0 +1,17 @@
+version: "3.8"
+
+networks:
+  osemapitest_default:
+    external: true
+
+services:
+  postgres:
+    build:
+      context: .
+    networks:
+      - osemapitest_default
+    shm_size: 256M
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
